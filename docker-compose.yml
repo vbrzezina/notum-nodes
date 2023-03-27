@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  server:
+    build:
+      context: server/
+      dockerfile: Dockerfile
+    ports:
+      - 3002:3002
+
+  client:
+    build:
+      context: client/
+      dockerfile: Dockerfile.dev
+
+    volumes:
+      - ./client/src:/usr/src/app/src
+      - ./client/public:/usr/src/app/public
+      - ./client/package.json:/usr/src/app/package.json
+      - ./client/package-lock.json:/usr/src/app/package-lock.json
+    
+    ports:
+      - 3000:3000
